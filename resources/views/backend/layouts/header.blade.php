@@ -53,8 +53,13 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <img src="" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    @if(Auth::guard('admin')->user()->gallery->image)
+                        <img src="{{url(Auth::guard('admin')->user()->gallery->image)}}" alt="Profile" class="rounded-circle">
+                    @endif
+
+                    <span class="d-none d-md-block dropdown-toggle ps-2">
+                        {{Auth::guard('admin')->user()->username}}
+                    </span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -64,7 +69,8 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center"
+                           href="{{route('admin.show',Auth::guard('admin')->user()->id)}}">
                             <i class="bi bi-person"></i>
                             <span>My Profile</span>
                         </a>
@@ -74,9 +80,20 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="">
+                        <a class="dropdown-item d-flex align-items-center"
+                           href="{{route('admin.edit',Auth::guard('admin')->user()->id)}}">
                             <i class="bi bi-gear"></i>
                             <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center"
+                           href="{{route('admin-change-password')}}">
+                            <i class="bi bi-file-lock-fill"></i>
+                            <span>Change password</span>
                         </a>
                     </li>
                     <li>
@@ -89,7 +106,8 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center"
+                           href="{{route('admin-logout')}}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
