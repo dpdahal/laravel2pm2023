@@ -53,7 +53,7 @@
             <li class="nav-item dropdown pe-3">
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    @if(Auth::guard('admin')->user()->gallery->image)
+                    @if(Auth::guard('admin')->user()->gallery)
                         <img src="{{url(Auth::guard('admin')->user()->gallery->image)}}" alt="Profile" class="rounded-circle">
                     @endif
 

@@ -69,12 +69,16 @@
                                                                class="btn btn-primary" title="show users">
                                                                 <i class="bi bi-eye-fill"></i>
                                                             </a>
-                                                            <a href="{{route('admin.edit',$admin->id)}}"
-                                                               class="btn btn-success" title="update user">
-                                                                <i class="bi bi-pencil-square"></i>
-                                                            </a>
-                                                            <button class="btn btn-danger" title="delete user"><i
-                                                                    class="bi bi-trash3-fill"></i></button>
+                                                            @can('super_admin')
+                                                                <a href="{{route('admin.edit',$admin->id)}}"
+                                                                   class="btn btn-success" title="update user">
+                                                                    <i class="bi bi-pencil-square"></i>
+                                                                </a>
+
+                                                                <button class="btn btn-danger" title="delete user"><i
+                                                                        class="bi bi-trash3-fill"></i></button>
+                                                            @endcan
+
                                                         </form>
                                                     </td>
 

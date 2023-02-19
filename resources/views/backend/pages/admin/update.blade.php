@@ -69,23 +69,25 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group mb-3">
-                                                    <label for="role">Role:
-                                                        <a style="color: red;text-decoration: none;">
-                                                            {{$errors->first('role')}}
-                                                        </a>
-                                                    </label>
-                                                    <select name="role" id="role" class="form-control">
-                                                        <option
-                                                            value="admin" {{$adminData->role=='admin' ? 'selected' :''}}>
-                                                            Admin
-                                                        </option>
-                                                        <option
-                                                            value="super_admin" {{$adminData->role=='super_admin' ? 'selected' :''}}>
-                                                            Super Admin
-                                                        </option>
-                                                    </select>
-                                                </div>
+                                                @can('super_admin')
+                                                    <div class="form-group mb-3">
+                                                        <label for="role">Role:
+                                                            <a style="color: red;text-decoration: none;">
+                                                                {{$errors->first('role')}}
+                                                            </a>
+                                                        </label>
+                                                        <select name="role" id="role" class="form-control">
+                                                            <option
+                                                                value="admin" {{$adminData->role=='admin' ? 'selected' :''}}>
+                                                                Admin
+                                                            </option>
+                                                            <option
+                                                                value="super_admin" {{$adminData->role=='super_admin' ? 'selected' :''}}>
+                                                                Super Admin
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                @endcan
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">

@@ -14,22 +14,28 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1>Category Data</h1>
+            <h1>News Details</h1>
         </div>
     </div>
     <div class="row mt-5">
-        @foreach($categoryData as $category)
-            <div class="col-md-6">
-                <h2>{{$category->name}}</h2>
-                @if($category->getNews->count() > 0)
-                    <ul>
-                        @foreach($category->getNews as $news)
-                            <li><a href="{{url('news').'/'.$news->slug}}">{{$news->title}}</a></li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
-        @endforeach
+        <div class="col-md-8">
+            @if($newsData->image)
+                <img src="{{url($newsData->image)}}" class="card-img-top" alt="...">
+            @endif
+            <h1>{{$newsData->title}}</h1>
+            <p>
+                {!! $newsData->description !!}
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h1>Related News</h1>
+
+            <ul>
+                @foreach($categoryNews as $cNews)
+                    <li><a href="{{url('news').'/'.$cNews->slug}}">{{$cNews->title}}</a></li>
+                @endforeach
+            </ul>
+        </div>
     </div>
 </div>
 

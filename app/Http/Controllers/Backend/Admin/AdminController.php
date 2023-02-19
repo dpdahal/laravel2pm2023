@@ -7,6 +7,7 @@ use App\Models\Admin\Admin;
 use App\Models\Admin\AdminGallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 
 class AdminController extends Controller
@@ -17,7 +18,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        $adminData = Admin::orderBy('id', 'desc')->paginate(4);
+        $authId = Auth::guard('admin')->user()->id;
+        $adminData = Admin::where('id', '!=', $authId)->orderBy('id', 'desc')->paginate(4);
         return view($this->backendPagePath . 'admin.index', compact('adminData'));
     }
 
@@ -81,7 +83,7 @@ class AdminController extends Controller
             'username' => 'required|unique:admins,username,' . $id . ',id',
             'email' => 'required|email|unique:admins,email,' . $id . ',id',
             'gender' => 'required',
-            'role' => 'required',
+
         ]);
 
         $data = $request->all();
@@ -105,6 +107,9 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
+        if (!Gate::allows('super_admin')) {
+            return redirect()->back()->with('error', 'You are not authorized to access this page');
+        }
         $findImage = AdminGallery::where('admin_id', '=', $id)->get();
         if ($findImage) {
             foreach ($findImage as $image) {

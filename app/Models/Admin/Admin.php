@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Str;
 
 class Admin extends Authenticatable
 {
@@ -18,6 +19,11 @@ class Admin extends Authenticatable
         'role',
         'is_active',
     ];
+
+    public function getNameAttribute($value)
+    {
+        return Str::title($value);
+    }
 
     public function gallery()
     {

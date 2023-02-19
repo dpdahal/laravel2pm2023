@@ -4,19 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Dashboard\DashboardController;
 use App\Http\Controllers\Backend\Auth\AdminLoginController;
 use App\Http\Controllers\Backend\Admin\AdminController;
+use App\Http\Controllers\Frontend\ApplicationController;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ApplicationController::class, 'index'])->name('index');
+Route::get('news/{criteria?}', [ApplicationController::class, 'news'])->name('news');
 
-Route::get('login', function () {
-    return "Normal Login";
-})->name('login');
+Route::get('login', [ApplicationController::class, 'login'])->name('login');
 
-Route::get('logout', function () {
-    return "Normal logout";
-})->name('logout');
+Route::get('logout', [ApplicationController::class, 'logout'])->name('logout');
 
 
 Route::group(['namespace' => 'Backend'], function () {
