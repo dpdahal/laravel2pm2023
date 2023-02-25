@@ -17,7 +17,7 @@ class NewsFactory extends Factory
     public function definition()
     {
         return [
-            'category_id' => $this->faker->numberBetween(1, 10),
+            'category_id' => $this->faker->numberBetween(1, 5),
             'title' => $this->faker->sentence(3),
             'slug' => $this->faker->unique()->slug,
             'intro_text' => $this->faker->paragraph(3),

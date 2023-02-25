@@ -22,7 +22,9 @@ class ApplicationController extends Controller
         if (!empty($request->criteria)) {
             $newsData = News::where('slug', '=', $request->criteria)->first();
             $cid = $newsData->getCategory->id;
-            $categoryNews = News::where('category_id', '=', $cid)->get();
+            $categoryNews = News::where('category_id', '=', $cid)
+                ->where('id', '!=', $newsData->id)
+                ->get();
             return view('news-details', compact('newsData', 'categoryNews'));
         }
 
@@ -38,5 +40,19 @@ class ApplicationController extends Controller
     public function logout()
     {
 
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $newsData = News::where('title', 'LIKE', '%' . $search . '%')
+            ->orWhere('description', 'LIKE', '%' . $search . '%')
+            ->get();
+
+        $output = '';
+        foreach ($newsData as $news) {
+            $output .= "<a href='" . route('news', $news->slug) . "'>" . $news->title . "</a>";
+        }
+        return $output;
     }
 }

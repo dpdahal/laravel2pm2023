@@ -16,7 +16,9 @@
     <link href="{{url('backend-assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{url('backend-assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
     <link href="{{url('backend-assets/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{url('backend-assets/ckeditor/contents.css')}}" rel="stylesheet">
     <link href="{{url('backend-assets/css/style.css')}}" rel="stylesheet">
+
 
 </head>
 <body>

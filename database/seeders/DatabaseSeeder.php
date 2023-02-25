@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory()->count(10)->create();
-        News::factory()->count(100)->create();
+        Category::factory()->count(5)->create();
+        News::factory()->count(4)->create();
 
         $this->call([
             AdminTableSeeder::class,
